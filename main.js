@@ -31,13 +31,13 @@ function play() {
 
     // 유저가 1~100 범위 밖 숫자를 입력하면 알려준다 (기회를 깎지 않음)
     if (userValue < 1 || userValue > 100) {
-        resultArea.textContent = "1과 100사이의 숫자를 입력해주세요."
+        chanceArea.textContent = "1과 100사이의 숫자를 입력해주세요."
         return;
     }
     
     // 유저가 이미 입력한 숫자를 또 입력하면 알려준다 (기회를 깎지 않음)
     if (history.includes(userValue)) {
-        resultArea.textContent = "이미 입력한 숫자입니다. 다른 숫자를 입력해주세요."
+        chanceArea.textContent = "이미 입력한 숫자입니다. 다른 숫자를 입력해주세요."
         return;
     }
 
@@ -61,6 +61,8 @@ function play() {
     // 남은 기회가 0번이면 gameover
     if(chances < 1) {
         gameOver = true;
+        resultArea.textContent = "";
+        chanceArea.textContent = "실패하셨습니다. 다시 도전하려면 reset버튼을 눌러주세요";
     }
     // gameover 되었을 때 playbutton 비활성화
     if (gameOver == true) {
@@ -75,7 +77,9 @@ function play() {
 function reset() {
     userInput.value = "";
     pickRandomNum();
-    resultArea.textContent = "결과값이 여기 나옵니다!"
+    chanceArea.textContent = "기회는 5번입니다.";
+    playButton.disabled = false;
+    chances = 5;
 }
 
 pickRandomNum();
